@@ -1,8 +1,8 @@
-# Sun Tzu Strategy Lab Campaign v4
+# Sun Tzu Strategy Lab Campaign v5 Layout Audited
 
-**Sun Tzu Strategy Lab Campaign v4** es una app web interactiva para analizar decisiones, practicar escenarios, guardar planes y entrenar criterio estratégico. Está inspirada en pensamiento estratégico clásico, pero no copia traducciones modernas de *El arte de la guerra*.
+**Sun Tzu Strategy Lab Campaign v5 Layout Audited** es una app web interactiva para analizar decisiones, practicar escenarios, guardar planes y entrenar criterio estratégico. Está inspirada en pensamiento estratégico clásico, pero no copia traducciones modernas de *El arte de la guerra*.
 
-## Qué incluye esta versión v4
+## Qué incluye esta versión v4 auditada
 
 - **Modo campaña**: 13 misiones encadenadas con decisiones, consecuencias, mapa de progreso, estado de mando, rango final y crónica guardable.
 - **Modo General**: genera un plan estratégico completo en 5 pasos.
@@ -90,3 +90,8 @@ El proyecto usa contenido original: principios, explicaciones, escenarios y preg
 ## Licencia
 
 MIT.
+
+
+## Corrección v5 Layout
+
+Se corrigió la composición visual del panel principal: métricas ya no flotan demasiado a la derecha, el dashboard rellena la rejilla sin huecos grandes, el contenido queda limitado en pantallas anchas y el pie del menú lateral no queda cortado.
