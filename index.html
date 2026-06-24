@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Sun Tzu Strategy Lab Campaign: laboratorio interactivo de estrategia con campaña, decisiones, diario táctico y entrenamiento para GitHub Pages.">
+  <meta name="theme-color" content="#11100d">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
+  <title>Sun Tzu Strategy Lab Campaign</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-skin="obsidian">
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">策</div>
+        <div><p class="eyebrow">Strategy Lab Campaign</p><h1>Sun Tzu</h1></div>
+      </div>
+      <nav class="nav-list" id="mainNav" aria-label="Secciones">
+        <button class="nav-item is-active" type="button" data-view="dashboard" aria-current="page"><span>⌂</span>Panel</button>
+        <button class="nav-item" type="button" data-view="general"><span>⚑</span>Modo General</button>
+        <button class="nav-item" type="button" data-view="analyzer"><span>◎</span>Analizador</button>
+        <button class="nav-item" type="button" data-view="simulator"><span>♟</span>Simulador</button>
+        <button class="nav-item" type="button" data-view="campaign"><span>⛩</span>Campaña</button>
+        <button class="nav-item" type="button" data-view="cards"><span>▣</span>Cartas</button>
+        <button class="nav-item" type="button" data-view="journal"><span>✎</span>Diario</button>
+        <button class="nav-item" type="button" data-view="training"><span>◈</span>Entreno</button>
+        <button class="nav-item" type="button" data-view="library"><span>☰</span>Biblioteca</button>
+        <button class="nav-item" type="button" data-view="data"><span>⬇</span>Datos</button>
+      </nav>
+      <div class="sidebar-footer">
+        <label class="field compact" for="skinSelect"><span>Skin</span><select id="skinSelect"><option value="obsidian">Obsidiana</option><option value="parchment">Pergamino</option><option value="jade">Jade oscuro</option><option value="crimson">Rojo estratégico</option><option value="midnight">Medianoche</option></select></label>
+        <button class="ghost-button full" type="button" id="resetDemoBtn">Reiniciar datos</button>
+      </div>
+    </aside>
+    <div class="mobile-topbar"><button class="icon-button" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">☰</button><strong>Sun Tzu Lab Campaign</strong><button class="icon-button" type="button" data-go="analyzer" aria-label="Nuevo análisis">＋</button></div>
+    <main id="main" class="main-content" tabindex="-1">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Offline-first · GitHub Pages · Sin backend</p>
+          <h2>Laboratorio interactivo de estrategia</h2>
+          <p class="hero-copy">Analiza situaciones reales, entrena decisiones, guarda planes, busca principios y convierte pensamiento estratégico clásico en acciones modernas.</p>
+          <div class="hero-actions"><button class="primary-button" type="button" data-go="general">Abrir Modo General</button><button class="secondary-button" type="button" data-go="campaign">Jugar campaña</button></div>
+        </div>
+        <div class="hero-panel" aria-label="Resumen de progreso">
+          <div class="metric"><span id="metricPlans">0</span><small>planes</small></div>
+          <div class="metric"><span id="metricFavs">0</span><small>favoritas</small></div>
+          <div class="metric"><span id="metricScore">0%</span><small>entreno</small></div>
+          <div class="metric"><span id="metricLevel">Aprendiz</span><small>nivel</small></div>
+          <div class="metric"><span id="metricMissions">0/13</span><small>campaña</small></div>
+        </div>
+      </header>
+      <section class="view is-visible" id="dashboard" aria-labelledby="dashboardTitle">
+        <div class="section-heading"><div><p class="eyebrow">Centro de mando</p><h3 id="dashboardTitle">Tu situación estratégica de un vistazo</h3></div><button class="primary-button" type="button" data-go="analyzer">Crear análisis</button></div>
+        <div class="dashboard-grid">
+          <article class="glass-card large-card"><h4>Reto diario</h4><div id="dailyChallenge" class="daily-box"></div><button class="secondary-button" type="button" id="completeDailyBtn">Marcar como hecho</button></article>
+          <article class="glass-card"><h4>Radar táctico</h4><canvas id="radarCanvas" width="320" height="220" aria-label="Radar táctico de progreso"></canvas></article>
+          <article class="glass-card"><h4>Acción rápida</h4><p>Desbloquea una decisión con una carta aleatoria.</p><button class="secondary-button" type="button" id="quickCardBtn">Sacar carta</button><div class="mini-output" id="quickCardOutput" aria-live="polite"></div></article>
+          <article class="glass-card"><h4>Progreso</h4><div class="progress-stack"><div><span>Claridad</span><meter id="meterClarity" min="0" max="100" value="20">20%</meter></div><div><span>Disciplina</span><meter id="meterDiscipline" min="0" max="100" value="20">20%</meter></div><div><span>Información</span><meter id="meterInfo" min="0" max="100" value="20">20%</meter></div><div><span>Escenarios</span><meter id="meterScenarios" min="0" max="100" value="0">0%</meter></div></div></article>
+          <article class="glass-card large-card"><h4>Últimos planes</h4><div id="recentPlans" class="empty-state">Aún no hay análisis guardados.</div></article>
+          <article class="glass-card large-card"><h4>Debilidades detectadas</h4><div id="weaknessBox" class="tag-cloud"></div></article>
+        </div>
+      </section>
+      <section class="view" id="general" aria-labelledby="generalTitle">
+        <div class="section-heading"><div><p class="eyebrow">Modo General</p><h3 id="generalTitle">Plan estratégico completo en 5 pasos</h3></div></div>
+        <div class="two-column">
+          <form class="glass-card form-card" id="generalForm">
+            <label class="field"><span>Misión</span><textarea id="gMission" rows="3" maxlength="700" required placeholder="Qué quieres conseguir y por qué importa"></textarea></label>
+            <label class="field"><span>Terreno</span><textarea id="gTerrain" rows="3" maxlength="700" placeholder="Dónde se juega: mercado, equipo, plazos, contexto, reglas"></textarea></label>
+            <label class="field"><span>Recursos</span><textarea id="gResources" rows="3" maxlength="700" placeholder="Tiempo, dinero, aliados, habilidades, información"></textarea></label>
+            <label class="field"><span>Fuerza contraria</span><textarea id="gOpposition" rows="3" maxlength="700" placeholder="Rival, presión, obstáculo, riesgo o resistencia"></textarea></label>
+            <label class="field"><span>Señales de éxito</span><textarea id="gSignals" rows="2" maxlength="500" placeholder="Cómo sabrás que vas ganando"></textarea></label>
+            <button class="primary-button" type="submit">Generar plan del General</button>
+          </form>
+          <article class="glass-card result-card"><h4>Plan del General</h4><div id="generalOutput" class="empty-state">Completa la misión y genera un plan.</div><div class="button-row hidden" id="generalActions"><button class="secondary-button" id="saveGeneralBtn" type="button">Guardar plan</button><button class="ghost-button" id="copyGeneralBtn" type="button">Copiar</button></div></article>
+        </div>
+      </section>
+      <section class="view" id="analyzer" aria-labelledby="analyzerTitle">
+        <div class="section-heading"><div><p class="eyebrow">Analizador estratégico</p><h3 id="analyzerTitle">Convierte una situación difícil en una decisión concreta</h3></div></div>
+        <div class="two-column">
+          <form class="glass-card form-card" id="strategyForm">
+            <label class="field"><span>Tipo de situación</span><select id="situationType"><option value="negociacion">Negociación</option><option value="conflicto">Conflicto laboral o personal</option><option value="competencia">Competencia / rival más fuerte</option><option value="proyecto">Proyecto difícil</option><option value="decision">Decisión de alto riesgo</option><option value="liderazgo">Liderazgo de equipo</option></select></label>
+            <label class="field"><span>Objetivo principal</span><textarea id="objective" rows="3" maxlength="600" required placeholder="Ejemplo: cerrar un acuerdo sin ceder demasiado margen"></textarea></label>
+            <label class="field"><span>Recursos disponibles</span><textarea id="resources" rows="3" maxlength="600" placeholder="Tiempo, dinero, equipo, contactos, información..."></textarea></label>
+            <label class="field"><span>Límites y riesgos</span><textarea id="constraints" rows="3" maxlength="600" placeholder="Qué no puedes perder, fechas, presupuesto, reputación..."></textarea></label>
+            <label class="field"><span>Rival, presión o fuerza contraria</span><textarea id="opponent" rows="3" maxlength="600" placeholder="Quién o qué dificulta la victoria"></textarea></label>
+            <label class="field"><span>Información faltante</span><textarea id="unknowns" rows="3" maxlength="600" placeholder="Datos que necesitas antes de actuar"></textarea></label>
+            <div class="range-grid"><label class="field"><span>Urgencia</span><input id="urgency" type="range" min="1" max="5" value="3"></label><label class="field"><span>Riesgo tolerable</span><input id="risk" type="range" min="1" max="5" value="2"></label><label class="field"><span>Ventaja actual</span><input id="advantage" type="range" min="1" max="5" value="2"></label></div>
+            <div class="button-row"><button class="primary-button" type="submit">Analizar</button><button class="ghost-button" type="button" id="clearFormBtn">Limpiar</button></div>
+          </form>
+          <article class="glass-card result-card"><h4>Diagnóstico</h4><div id="analysisOutput" class="empty-state">Completa el formulario y pulsa Analizar.</div><div class="button-row hidden" id="analysisActions"><button class="secondary-button" type="button" id="saveAnalysisBtn">Guardar en diario</button><button class="ghost-button" type="button" id="copyAnalysisBtn">Copiar</button></div></article>
+        </div>
+      </section>
+      <section class="view" id="simulator" aria-labelledby="simulatorTitle">
+        <div class="section-heading"><div><p class="eyebrow">Simulador avanzado</p><h3 id="simulatorTitle">50 escenarios con consecuencias</h3></div><button class="ghost-button" type="button" id="newScenarioBtn">Nuevo escenario</button></div>
+        <article class="glass-card simulator-card"><p class="scenario-tag" id="scenarioTag">Escenario</p><h4 id="scenarioTitle">Cargando...</h4><p id="scenarioText"></p><div class="option-grid" id="scenarioOptions"></div><div id="scenarioFeedback" class="feedback-box" aria-live="polite"></div></article>
+        <article class="glass-card"><h4>Historial de simulación</h4><div id="scenarioHistory" class="compact-list empty-state">Aún no has jugado escenarios.</div></article>
+      </section>
+      <section class="view" id="campaign" aria-labelledby="campaignTitle">
+        <div class="section-heading"><div><p class="eyebrow">Modo campaña</p><h3 id="campaignTitle">Las 13 campañas del estratega</h3></div><div class="button-row"><button class="secondary-button" type="button" id="campaignJournalBtn">Guardar crónica</button><button class="ghost-button" type="button" id="resetCampaignBtn">Reiniciar campaña</button></div></div>
+        <div class="campaign-grid">
+          <article class="glass-card campaign-status-card">
+            <h4>Estado de mando</h4>
+            <div class="campaign-meter"><span>Honor</span><meter id="campHonor" min="0" max="100" value="50">50</meter><strong id="campHonorText">50</strong></div>
+            <div class="campaign-meter"><span>Información</span><meter id="campInfo" min="0" max="100" value="50">50</meter><strong id="campInfoText">50</strong></div>
+            <div class="campaign-meter"><span>Recursos</span><meter id="campResources" min="0" max="100" value="50">50</meter><strong id="campResourcesText">50</strong></div>
+            <div class="campaign-meter"><span>Impulso</span><meter id="campMomentum" min="0" max="100" value="50">50</meter><strong id="campMomentumText">50</strong></div>
+            <div class="campaign-rank" id="campaignRank">Rango: Aprendiz de estrategia</div>
+          </article>
+          <article class="glass-card campaign-main-card">
+            <p class="scenario-tag" id="campaignChapter">Campaña</p>
+            <h4 id="campaignMissionTitle">Cargando misión...</h4>
+            <p id="campaignBriefing"></p>
+            <div class="mission-objective" id="campaignObjective"></div>
+            <div class="option-grid campaign-options" id="campaignOptions"></div>
+            <div id="campaignOutcome" class="feedback-box" aria-live="polite">Elige una orden para avanzar.</div>
+          </article>
+          <article class="glass-card campaign-map-card">
+            <h4>Mapa de campaña</h4>
+            <div id="campaignMap" class="campaign-map"></div>
+          </article>
+          <article class="glass-card campaign-log-card">
+            <h4>Crónica</h4>
+            <div id="campaignLog" class="compact-list empty-state">Aún no hay movimientos.</div>
+          </article>
+        </div>
+      </section>
+      <section class="view" id="cards" aria-labelledby="cardsTitle">
+        <div class="section-heading"><div><p class="eyebrow">Cartas de estrategia</p><h3 id="cardsTitle">100 principios aplicables</h3></div><button class="primary-button" type="button" id="drawCardBtn">Sacar carta</button></div>
+        <div class="cards-layout"><article class="strategy-card" id="drawnCard" aria-live="polite"><p class="card-kicker">Carta inicial</p><h4>La información vence a la fuerza</h4><p>Antes de gastar energía, reduce niebla. Una decisión con datos pobres suele convertir valentía en coste.</p><small>Pregunta: ¿qué dato cambiaría tu siguiente movimiento?</small></article><aside class="glass-card"><h4>Favoritas</h4><div id="favoriteCards" class="compact-list empty-state">Sin favoritas todavía.</div></aside></div>
+      </section>
+      <section class="view" id="journal" aria-labelledby="journalTitle">
+        <div class="section-heading"><div><p class="eyebrow">Diario táctico</p><h3 id="journalTitle">Registra, busca y aprende de tus decisiones</h3></div><button class="secondary-button" type="button" id="exportMdBtn">Exportar Markdown</button></div>
+        <div class="two-column"><form class="glass-card form-card" id="journalForm"><label class="field"><span>Título</span><input id="journalTitleInput" maxlength="120" required placeholder="Ejemplo: negociación con proveedor"></label><label class="field"><span>Etiquetas</span><input id="journalTagsInput" maxlength="120" placeholder="trabajo, riesgo, negociación"></label><label class="field"><span>Entrada</span><textarea id="journalBodyInput" rows="9" maxlength="2000" required placeholder="Situación, decisión, resultado esperado y lección..."></textarea></label><button class="primary-button" type="submit">Guardar entrada</button></form><article class="glass-card"><div class="list-toolbar"><h4>Entradas</h4><input id="journalSearch" placeholder="Buscar en diario" aria-label="Buscar en diario"></div><div id="journalEntries" class="compact-list empty-state">Sin entradas.</div></article></div>
+      </section>
+      <section class="view" id="training" aria-labelledby="trainingTitle">
+        <div class="section-heading"><div><p class="eyebrow">Entrenamiento</p><h3 id="trainingTitle">100 preguntas de criterio estratégico</h3></div><button class="ghost-button" type="button" id="nextQuestionBtn">Otra pregunta</button></div>
+        <article class="glass-card training-card"><p class="scenario-tag" id="questionCategory">Categoría</p><h4 id="questionText">Pregunta</h4><div class="option-grid" id="questionOptions"></div><div id="questionFeedback" class="feedback-box" aria-live="polite"></div></article>
+      </section>
+      <section class="view" id="library" aria-labelledby="libraryTitle">
+        <div class="section-heading"><div><p class="eyebrow">Biblioteca</p><h3 id="libraryTitle">Busca entre 100 principios</h3></div></div>
+        <div class="library-tools"><input id="globalSearch" placeholder="Buscar por principio, categoría o aplicación" aria-label="Buscar principios"><select id="categoryFilter"><option value="all">Todas las categorías</option></select></div>
+        <div id="principleList" class="principle-grid"></div>
+      </section>
+      <section class="view" id="data" aria-labelledby="dataTitle">
+        <div class="section-heading"><div><p class="eyebrow">Datos y mantenimiento</p><h3 id="dataTitle">Exporta, importa o limpia tu laboratorio</h3></div></div>
+        <div class="dashboard-grid"><article class="glass-card"><h4>Exportaciones</h4><p>Descarga tus datos para copia de seguridad.</p><div class="button-stack"><button class="secondary-button" id="exportJsonBtn" type="button">Exportar JSON</button><button class="ghost-button" id="exportCsvBtn" type="button">Exportar CSV diario</button></div></article><article class="glass-card"><h4>Importar JSON</h4><p>Restaura una copia exportada desde esta app.</p><input id="importFile" type="file" accept="application/json"><button class="secondary-button" id="importJsonBtn" type="button">Importar</button></article><article class="glass-card large-card"><h4>Estado técnico</h4><ul class="check-list"><li>Sin dependencias externas.</li><li>CSP restrictiva incluida.</li><li>Datos locales en navegador.</li><li>PWA con service worker.</li><li>Diseño responsive móvil/tablet/PC.</li></ul></article></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>

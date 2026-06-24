@@ -1,0 +1,17 @@
+{
+  "name": "Sun Tzu Strategy Lab Campaign",
+  "short_name": "SunTzuCampaign",
+  "description": "Laboratorio estratégico offline con campaña, simulador, cartas, diario y entrenamiento.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#11100d",
+  "theme_color": "#11100d",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
